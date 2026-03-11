@@ -2,7 +2,6 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>Video</title>
 <style>
 body{
 margin:0;
@@ -11,8 +10,14 @@ display:flex;
 justify-content:center;
 align-items:center;
 height:100vh;
+flex-direction:column;
+}
+button{
+font-size:20px;
+padding:15px 30px;
 }
 video{
+display:none;
 width:100%;
 max-width:800px;
 }
@@ -21,9 +26,19 @@ max-width:800px;
 
 <body>
 
-<video autoplay playsinline>
-  <source src="video.mp4" type="video/mp4">
+<button onclick="playVideo()">اضغط لتشغيل الفيديو</button>
+
+<video id="vid" controls>
+<source src="video.mp4" type="video/mp4">
 </video>
+
+<script>
+function playVideo(){
+const v = document.getElementById("vid");
+v.style.display="block";
+v.play();
+}
+</script>
 
 </body>
 </html>
