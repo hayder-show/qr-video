@@ -1,24 +1,43 @@
+```html
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
 <meta charset="UTF-8">
+<title>Scanning...</title>
+
 <style>
 body{
-margin:0;
 background:black;
+color:#00ff9c;
+font-family:monospace;
 display:flex;
 justify-content:center;
 align-items:center;
 height:100vh;
 flex-direction:column;
+margin:0;
 }
-button{
-font-size:20px;
-padding:15px 30px;
+
+#text{
+font-size:22px;
+margin-bottom:20px;
 }
+
+#bar{
+width:300px;
+height:20px;
+border:1px solid #00ff9c;
+}
+
+#progress{
+height:100%;
+width:0%;
+background:#00ff9c;
+}
+
 video{
 display:none;
-width:100%;
+width:90%;
 max-width:800px;
 }
 </style>
@@ -26,19 +45,59 @@ max-width:800px;
 
 <body>
 
-<button onclick="playVideo()">Press O Here</button>
+<div id="text">Initializing scan...</div>
+
+<div id="bar">
+<div id="progress"></div>
+</div>
 
 <video id="vid" controls>
 <source src="video.mp4" type="video/mp4">
 </video>
 
 <script>
-function playVideo(){
-const v = document.getElementById("vid");
-v.style.display="block";
-v.play();
+
+let messages = [
+"Connecting to device...",
+"Scanning photos...",
+"Scanning messages...",
+"Analyzing personality...",
+"Finding embarrassing data...",
+"Uploading results..."
+];
+
+let progress = 0;
+let bar = document.getElementById("progress");
+let text = document.getElementById("text");
+
+let interval = setInterval(()=>{
+
+progress += Math.random()*10;
+bar.style.width = progress + "%";
+
+text.innerHTML = messages[Math.floor(Math.random()*messages.length)];
+
+if(progress >= 100){
+clearInterval(interval);
+
+text.innerHTML = "Target acquired.";
+
+setTimeout(()=>{
+document.getElementById("bar").style.display="none";
+text.style.display="none";
+
+let vid = document.getElementById("vid");
+vid.style.display="block";
+vid.play();
+
+},1200);
+
 }
+
+},200);
+
 </script>
 
 </body>
 </html>
+```
