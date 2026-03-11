@@ -27,6 +27,7 @@ margin-bottom:20px;
 width:300px;
 height:20px;
 border:1px solid #00ff9c;
+margin-bottom:20px;
 }
 
 #progress{
@@ -39,6 +40,23 @@ video{
 display:none;
 width:90%;
 max-width:800px;
+}
+
+#btn{
+display:none;
+margin-top:20px;
+padding:12px 30px;
+background:black;
+border:2px solid #00ff9c;
+color:#00ff9c;
+font-family:monospace;
+font-size:18px;
+cursor:pointer;
+}
+
+#btn:hover{
+background:#00ff9c;
+color:black;
 }
 </style>
 </head>
@@ -54,6 +72,8 @@ max-width:800px;
 <video id="vid" controls>
 <source src="video.mp4" type="video/mp4">
 </video>
+
+<button id="btn" onclick="location.reload()">CLICK HERE</button>
 
 <script>
 
@@ -78,11 +98,13 @@ bar.style.width = progress + "%";
 text.innerHTML = messages[Math.floor(Math.random()*messages.length)];
 
 if(progress >= 100){
+
 clearInterval(interval);
 
 text.innerHTML = "Target acquired.";
 
 setTimeout(()=>{
+
 document.getElementById("bar").style.display="none";
 text.style.display="none";
 
@@ -95,6 +117,13 @@ vid.play();
 }
 
 },200);
+
+
+let video = document.getElementById("vid");
+
+video.onended = function(){
+document.getElementById("btn").style.display="block";
+};
 
 </script>
 
